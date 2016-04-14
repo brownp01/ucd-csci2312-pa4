@@ -11,6 +11,9 @@
 
 #include "Gaming.h"
 #include "DefaultAgentStrategy.h"
+#include "Piece.h"
+#include "Agent.h"
+#include "Strategy.h"
 
 namespace Gaming {
 

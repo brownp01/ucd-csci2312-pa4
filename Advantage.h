@@ -17,14 +17,14 @@ namespace Gaming {
         static const double ADVANTAGE_MULT_FACTOR;
 
         Advantage(const Game &g, const Position &p, double capacity);
-        ~Advantage();
+        ~Advantage(){};
 
         PieceType getType() const override { return PieceType::ADVANTAGE; }
 
         void print(std::ostream &os) const override;
 
         double getCapacity() const override;
-        double consume() override;
+        double consume() override{};
     };
 }
 
