@@ -6,8 +6,9 @@
 
 namespace Gaming{
 
+    const char FOOD_ID = 'F';
 
-    Food::Food(const Game &g, const Position &p, double capacity) {
+    Food::Food(const Game &g, const Position &p, double capacity) : Resource(g, p, capacity) {
 
     }
 

@@ -14,59 +14,93 @@ namespace Gaming{
     }
 
     std::ostream &Gaming::operator<<(std::ostream &os, const GamingException &ex) {
-        return <#initializer#>;
+
+        ex.__print_args(os);
+        return os;
     }
 
     DimensionEx::DimensionEx(unsigned expWidth, unsigned expHeight, unsigned width, unsigned height) {
+
+        __name = "DimensionsEX";
+        __exp_width = expWidth;
+        __exp_height = expHeight;
+        __width = width;
+        __height = height;
 
     }
 
     unsigned DimensionEx::getExpWidth() const {
 
+        return __exp_width;
+
     }
 
     unsigned DimensionEx::getExpHeight() const {
-        return 0;
+
+        return __exp_height;
     }
 
     unsigned DimensionEx::getWidth() const {
-        return 0;
+
+        return __width;
     }
 
     unsigned DimensionEx::getHeight() const {
-        return 0;
+
+        return __height;
     }
 
     void InsufficientDimensionsEx::__print_args(std::ostream &os) const {
 
+        os << getName() << ": " << "dimensions must be greater than " << getExpWidth() << "x"
+        << getExpHeight() << ", user set to " << getWidth() << "x" << getHeight() << std::endl;
+
     }
 
     InsufficientDimensionsEx::InsufficientDimensionsEx(unsigned minWidth, unsigned minHeight, unsigned width,
-                                                       unsigned height) {
+                                                       unsigned height) :
+                DimensionEx(minWidth, minHeight, width, height){
+
+            setName("InsufficientDimensionsEx");
 
     }
 
     void OutOfBoundsEx::__print_args(std::ostream &os) const {
 
+        os << getName() << ": " << "Position " << getHeight() << ", " << getWidth() << " is outside of the "
+        << getExpWidth() << "x" << getExpHeight() << " game grid" << std::endl;
+
     }
 
-    OutOfBoundsEx::OutOfBoundsEx(unsigned maxWidth, unsigned maxHeight, unsigned width, unsigned height) {
+    OutOfBoundsEx::OutOfBoundsEx(unsigned maxWidth, unsigned maxHeight, unsigned width, unsigned height)
+        : DimensionEx(maxWidth, maxHeight, width, height){
+
+        setName("OutOfBoundsEx");
 
     }
 
     void PositionEx::__print_args(std::ostream &os) const {
 
+
+
     }
 
     PositionEx::PositionEx(unsigned x, unsigned y) {
 
+        __x = x;
+        __y = y;
+
     }
 
-    PositionNonemptyEx::PositionNonemptyEx(unsigned x, unsigned y) {
+    PositionNonemptyEx::PositionNonemptyEx(unsigned x, unsigned y) : PositionEx(x, y) {
+
+        setName("PositionNonEmptyEx");
 
     }
 
-    PositionEmptyEx::PositionEmptyEx(unsigned x, unsigned y) {
+    PositionEmptyEx::PositionEmptyEx(unsigned x, unsigned y) : PositionEx(x, y) {
+
+        setName("PositionEmptyEx");
 
     }
 
@@ -75,6 +109,8 @@ namespace Gaming{
     }
 
     PosVectorEmptyEx::PosVectorEmptyEx() {
+
+        setName("PosVectoreEmptyEx");
 
     }
 }

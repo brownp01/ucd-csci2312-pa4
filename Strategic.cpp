@@ -6,7 +6,7 @@
 
 namespace Gaming{
 
-    const char STRATEGIC_ID = 'T';
+    const char Strategic::STRATEGIC_ID = 'T';
 
 
     Strategic::Strategic(const Game &g, const Position &p, double energy, Strategy *s) :
@@ -24,6 +24,6 @@ namespace Gaming{
 
     ActionType Strategic::takeTurn(const Surroundings &s) const {
 
-        return (*__strategy((s);
+        return (*__strategy)(s);
     }
 }

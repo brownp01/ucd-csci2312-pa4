@@ -10,12 +10,12 @@
 
 namespace Gaming {
 
-    unsigned int NUM_INIT_AGENT_FACTOR = 4;
-    unsigned int NUM_INIT_RESOURCE_FACTOR = 2;
-    int MIN_WIDTH = 3;
-    int MIN_HEIGHT = 3;
-    double STARTING_AGENT_ENERGY = 20;
-    double STARTING_RESOURCE_CAPACITY = 10;
+    const unsigned int Game::NUM_INIT_AGENT_FACTOR = 4;
+    const unsigned int Game::NUM_INIT_RESOURCE_FACTOR = 2;
+    const unsigned int Game::MIN_WIDTH = 3;
+    const unsigned int Game::MIN_HEIGHT = 3;
+    const double Game::STARTING_AGENT_ENERGY = 20;
+    const double Game::STARTING_RESOURCE_CAPACITY = 10;
 
 
     void Game::populate() {
@@ -227,7 +227,7 @@ namespace Gaming {
     }
 
     std::ostream &Gaming::operator<<(std::ostream &os, const Game &game) {
-        return <#initializer#>;
+        return os;
     }
 
     Game::Game(const Game &another) {

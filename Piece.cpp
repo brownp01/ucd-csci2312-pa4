@@ -6,7 +6,7 @@
 
 namespace Gaming {
 
-    unsigned int __idGen = 0;
+    unsigned int Piece::__idGen = 0;
 
 
     Piece::Piece(const Game &g, const Position &p) :
