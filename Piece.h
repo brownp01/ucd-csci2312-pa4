@@ -9,6 +9,7 @@
 
 #include "Game.h"
 
+
 namespace Gaming {
 
     class Resource;
@@ -34,7 +35,7 @@ namespace Gaming {
 
     public:
         Piece(const Game &g, const Position &p);
-        virtual ~Piece();
+        virtual ~Piece(){};
 
         const Position getPosition() const { return __position; }
         void setPosition(const Position &p) { __position = p; }

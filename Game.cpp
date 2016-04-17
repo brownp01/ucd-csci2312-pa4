@@ -52,7 +52,7 @@ namespace Gaming {
             int i = d(gen);
             if (__grid[i] == nullptr) {
                 Position pos(i / __width, i % __width);
-                __grid[i] = new Advantage(*this, pos, Game::STARTING_RESOURCE_CAPACITY;
+                __grid[i] = new Advantage(*this, pos, Game::STARTING_RESOURCE_CAPACITY);
                 numStrategic --;
             }
         }
@@ -76,6 +76,166 @@ namespace Gaming {
         __round = 0;
         __status = NOT_STARTED;
         __verbose = false;
+
+    }
+
+    Game::Game(unsigned width, unsigned height, bool manual) {
+
+        __width = width;
+        __height = height;
+        __round = 0;
+        __status = NOT_STARTED;
+        __verbose = false;
+
+        if (manual == false)
+            populate();
+
+        else{
+            __numInitResources = 0;
+            __numInitAgents = 0;
+        }
+
+    }
+
+    Game::~Game() {
+
+    }
+
+    unsigned int Game::getNumPieces() const {
+
+        unsigned int pieces = 0;
+
+        for (int i = 0; i < __grid.size(); i++){
+            if (__grid[i] != nullptr)
+                pieces++;
+        }
+
+        return pieces;
+    }
+
+    unsigned int Game::getNumAgents() const {
+
+        unsigned int pieces = 0;
+
+        for (int i = 0; i < __grid.size(); i++){
+            if (__grid[i] != nullptr && (__grid[i]->getType() == SIMPLE) || __grid[i]->getType() == STRATEGIC)
+                        pieces++;
+        }
+
+        return pieces;
+    }
+
+    unsigned int Game::getNumSimple() const {
+
+        unsigned int pieces = 0;
+        for (int i = 0; i < __grid.size(); i++){
+            if (__grid[i] != nullptr && __grid[i]->getType() == SIMPLE)
+                pieces++;
+        }
+
+        return pieces;
+    }
+
+    unsigned int Game::getNumStrategic() const {
+
+        unsigned int pieces = 0;
+        for (int i = 0; i < __grid.size(); i++) {
+            if (__grid[i] != nullptr && __grid[i]->getType() == STRATEGIC)
+                pieces++;
+        }
+
+        return pieces;
+    }
+
+    unsigned int Game::getNumResources() const {
+
+        unsigned int pieces = 0;
+        for (int i = 0; i < __grid.size(); i++) {
+            if (__grid[i] != nullptr && (__grid[i]->getType() == FOOD || __grid[i]->getType() == ADVANTAGE))
+                pieces++;
+        }
+
+        return pieces;
+    }
+
+    const Piece *Game::getPiece(unsigned int x, unsigned int y) const {
+        return nullptr;
+    }
+
+    void Game::addSimple(const Position &position) {
+
+    }
+
+    void Game::addSimple(const Position &position, double energy) {
+
+    }
+
+    void Game::addSimple(unsigned x, unsigned y) {
+
+    }
+
+    void Game::addSimple(unsigned x, unsigned y, double energy) {
+
+    }
+
+    void Game::addStrategic(const Position &position, Strategy *s) {
+
+    }
+
+    void Game::addStrategic(unsigned x, unsigned y, Strategy *s) {
+
+    }
+
+    void Game::addFood(const Position &position) {
+
+    }
+
+    void Game::addFood(unsigned x, unsigned y) {
+
+    }
+
+    void Game::addAdvantage(const Position &position) {
+
+    }
+
+    void Game::addAdvantage(unsigned x, unsigned y) {
+
+    }
+
+    const Surroundings Game::getSurroundings(const Position &pos) const {
+        return Gaming::Surroundings();
+    }
+
+    const ActionType Game::reachSurroundings(const Position &from, const Position &to) {
+        return S;
+    }
+
+    bool Game::isLegal(const ActionType &ac, const Position &pos) const {
+        return false;
+    }
+
+    const Position Game::move(const Position &pos, const ActionType &ac) const {
+        return Gaming::Position();
+    }
+
+    void Game::round() {
+
+    }
+
+    void Game::play(bool verbose) {
+
+    }
+
+    std::ostream &Gaming::operator<<(std::ostream &os, const Game &game) {
+        return <#initializer#>;
+    }
+
+    Game::Game(const Game &another) {
+
+        __width = another.__width;
+        __height = another.__height;
+        __grid = another.__grid;
+        __status = another.__status;
 
     }
 }

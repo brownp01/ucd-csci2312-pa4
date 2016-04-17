@@ -19,7 +19,7 @@ namespace Gaming {
         static const double RESOURCE_SPOIL_FACTOR;
 
         Resource(const Game &g, const Position &p, double capacity);
-        ~Resource();
+        ~Resource(){};
 
         virtual double getCapacity() const { return __capacity; }
         virtual double consume();
