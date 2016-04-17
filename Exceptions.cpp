@@ -81,7 +81,7 @@ namespace Gaming{
 
     void PositionEx::__print_args(std::ostream &os) const {
 
-
+        os << getName() << ": " << "(" << __x << "," << __y << ")" << std::endl;
 
     }
 

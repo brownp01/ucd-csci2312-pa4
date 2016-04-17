@@ -17,6 +17,8 @@ namespace Gaming {
     const double Game::STARTING_AGENT_ENERGY = 20;
     const double Game::STARTING_RESOURCE_CAPACITY = 10;
 
+    PositionRandomizer Game::__posRandomizer = PositionRandomizer();
+
 
     void Game::populate() {
 
@@ -32,7 +34,7 @@ namespace Gaming {
 
         while (numStrategic > 0) {
             int i = d(gen);
-            if (__grid[i] == nullptr) {
+            if (__grid[i] == nullptr && i != (__width * __height)) {
                 Position pos(i / __width, i % __width);
                 __grid[i] = new Strategic(*this, pos, Game::STARTING_AGENT_ENERGY);
                 numStrategic --;
@@ -41,7 +43,7 @@ namespace Gaming {
 
         while (numSimple > 0) {
             int i = d(gen);
-            if (__grid[i] == nullptr) {
+            if (__grid[i] == nullptr && i != (__width * __height)) {
                 Position pos(i / __width, i % __width);
                 __grid[i] = new Simple(*this, pos, Game::STARTING_AGENT_ENERGY);
                 numStrategic --;
@@ -50,7 +52,7 @@ namespace Gaming {
 
         while (numAdvantages > 0) {
             int i = d(gen);
-            if (__grid[i] == nullptr) {
+            if (__grid[i] == nullptr && i != (__width * __height)) {
                 Position pos(i / __width, i % __width);
                 __grid[i] = new Advantage(*this, pos, Game::STARTING_RESOURCE_CAPACITY);
                 numStrategic --;
@@ -59,7 +61,7 @@ namespace Gaming {
 
         while (numFoods > 0) {
             int i = d(gen);
-            if (__grid[i] == nullptr) {
+            if (__grid[i] == nullptr && i != (__width * __height)) {
                 Position pos(i / __width, i % __width);
                 __grid[i] = new Food(*this, pos, Game::STARTING_RESOURCE_CAPACITY);
                 numStrategic --;
@@ -80,6 +82,9 @@ namespace Gaming {
     }
 
     Game::Game(unsigned width, unsigned height, bool manual) {
+
+        if (width < MIN_WIDTH || height < MIN_HEIGHT)
+            throw InsufficientDimensionsEx(MIN_WIDTH, MIN_HEIGHT, width, height);
 
         __width = width;
         __height = height;
@@ -115,51 +120,52 @@ namespace Gaming {
 
     unsigned int Game::getNumAgents() const {
 
-        unsigned int pieces = 0;
+        unsigned int agents = 0;
 
         for (int i = 0; i < __grid.size(); i++){
             if (__grid[i] != nullptr && (__grid[i]->getType() == SIMPLE) || __grid[i]->getType() == STRATEGIC)
-                        pieces++;
+                        agents++;
         }
 
-        return pieces;
+        return agents;
     }
 
     unsigned int Game::getNumSimple() const {
 
-        unsigned int pieces = 0;
+        unsigned int simple = 0;
         for (int i = 0; i < __grid.size(); i++){
             if (__grid[i] != nullptr && __grid[i]->getType() == SIMPLE)
-                pieces++;
+                simple++;
         }
 
-        return pieces;
+        return simple;
     }
 
     unsigned int Game::getNumStrategic() const {
 
-        unsigned int pieces = 0;
+        unsigned int strategic = 0;
         for (int i = 0; i < __grid.size(); i++) {
             if (__grid[i] != nullptr && __grid[i]->getType() == STRATEGIC)
-                pieces++;
+                strategic++;
         }
 
-        return pieces;
+        return strategic;
     }
 
     unsigned int Game::getNumResources() const {
 
-        unsigned int pieces = 0;
+        unsigned int resources = 0;
         for (int i = 0; i < __grid.size(); i++) {
             if (__grid[i] != nullptr && (__grid[i]->getType() == FOOD || __grid[i]->getType() == ADVANTAGE))
-                pieces++;
+                resources++;
         }
 
-        return pieces;
+        return resources;
     }
 
     const Piece *Game::getPiece(unsigned int x, unsigned int y) const {
-        return nullptr;
+
+
     }
 
     void Game::addSimple(const Position &position) {

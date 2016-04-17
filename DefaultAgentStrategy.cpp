@@ -12,6 +12,7 @@ namespace Gaming{
     }
 
     ActionType DefaultAgentStrategy::operator()(const Surroundings &s) const {
-        return S;
+
+        return STAY;
     }
 }

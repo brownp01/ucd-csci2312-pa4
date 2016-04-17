@@ -17,7 +17,8 @@ namespace Gaming{
     }
 
     ActionType AggressiveAgentStrategy::operator()(const Surroundings &s) const {
-        return S;
+
+        return STAY;
     }
 }
 

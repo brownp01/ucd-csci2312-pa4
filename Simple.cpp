@@ -6,12 +6,15 @@
 
 namespace Gaming{
 
+    const char Simple::SIMPLE_ID = 'S';
 
     Simple::Simple(const Game &g, const Position &p, double energy) : Agent(g, p, energy) {
 
     }
 
     void Simple::print(std::ostream &os) const {
+
+        os << SIMPLE_ID << __id;
 
     }
 

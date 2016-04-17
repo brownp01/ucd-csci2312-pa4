@@ -6,13 +6,15 @@
 
 namespace Gaming{
 
-    const char FOOD_ID = 'F';
+    const char Food::FOOD_ID = 'F';
 
     Food::Food(const Game &g, const Position &p, double capacity) : Resource(g, p, capacity) {
 
     }
 
     void Food::print(std::ostream &os) const {
+
+        os << FOOD_ID << __id;
 
     }
 }

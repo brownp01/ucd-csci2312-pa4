@@ -15,10 +15,20 @@ namespace Gaming{
     }
 
     double Resource::consume() {
-        return 0;
+
+        double consume = __capacity;
+
+        __capacity = 0;
+        finish();
+        return consume;
     }
 
     void Resource::age() {
+
+        __capacity /= RESOURCE_SPOIL_FACTOR;
+
+        if(__capacity < 1)
+            finish();
 
     }
 
