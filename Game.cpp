@@ -132,35 +132,36 @@ namespace Gaming {
 
     unsigned int Game::getNumSimple() const {
 
-        unsigned int simple = 0;
-        for (int i = 0; i < __grid.size(); i++){
-            if (__grid[i] != nullptr && __grid[i]->getType() == SIMPLE)
-                simple++;
+        unsigned int numAgents = 0;
+
+        for (auto it = __grid.begin(); it != __grid.end(); ++it) {
+            Simple *simple = dynamic_cast<Simple*>(*it);
+            if (simple) numAgents ++;
         }
 
-        return simple;
+        return numAgents;
     }
 
     unsigned int Game::getNumStrategic() const {
 
-        unsigned int strategic = 0;
-        for (int i = 0; i < __grid.size(); i++) {
-            if (__grid[i] != nullptr && __grid[i]->getType() == STRATEGIC)
-                strategic++;
-        }
+        unsigned int numAgents = 0;
 
-        return strategic;
+        for (auto it = __grid.begin(); it != __grid.end(); ++it) {
+            Strategic *strategic = dynamic_cast<Strategic*>(*it);
+            if (strategic) numAgents++;
+        }
+        return numAgents;
     }
 
     unsigned int Game::getNumResources() const {
 
-        unsigned int resources = 0;
-        for (int i = 0; i < __grid.size(); i++) {
-            if (__grid[i] != nullptr && (__grid[i]->getType() == FOOD || __grid[i]->getType() == ADVANTAGE))
-                resources++;
-        }
+        unsigned int numAgents = 0;
 
-        return resources;
+        for (auto it = __grid.begin(); it != __grid.end(); ++it) {
+            Resource *resource = dynamic_cast<Resource*>(*it);
+            if (resource) numAgents++;
+        }
+        return numAgents;
     }
 
     const Piece *Game::getPiece(unsigned int x, unsigned int y) const {
